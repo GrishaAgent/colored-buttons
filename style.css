@@ -1,0 +1,88 @@
+p {
+	margin-top: 0px;
+	margin-bottom: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#game-timer {
+	position: absolute;
+	right: 50%;
+	top: 5%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+}
+
+#start-button {
+	margin-bottom: 40px;
+	padding: 10px 10px;
+	border-radius: 5px;
+	border-width: 1px;
+}
+
+#start-button:hover {
+	background-color: blanchedalmond;
+	border-color: rgb(255, 255, 255);
+}
+
+#color-palette {
+	margin-bottom: 20px;
+}
+
+.color-palette-button {
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+	border-width: 3px;
+	border-color: rgba(255, 255, 255, 0);
+	margin: 0px 25px;
+}
+
+.color-palette-button:hover {
+	border-color: rgb(255, 255, 255);
+}
+
+.button-color-red {
+	background-color: red;
+}
+
+.button-color-green {
+	background-color: green;
+}
+
+.button-color-blue {
+	background-color: blue;
+}
+
+.button-color-default {
+	background-color: rgb(190, 190, 190);
+}
+
+.game-button {
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+	border-width: 3px;
+	border-color: rgba(255, 255, 255, 0);
+	margin: 0px 25px;
+}
+
+.game-button:hover {
+	border-color: rgb(84, 84, 84);
+}
+
+#results-box {
+	position: absolute;
+	right: 20%;
+	top: 5%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	visibility: hidden;
+}
+
+#results-box > p {
+	margin-bottom: 5px;
+}
+
+#results-relative, #results-absolute {
+	padding-bottom: 5px;
+}
