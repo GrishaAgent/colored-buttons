@@ -23,8 +23,19 @@ const gameStates = {
 };
 let currentGameStates = [];
 
+const buttonTypes = {
+	paletteButton: "palette-button",
+	gameButton: "game-button"
+};
 const gameButtonsNumber = 5;
-
+for (let i = 0; i < gameButtonsNumber; i++) {
+	let button = document.createElement("button");
+	button.classList.add(buttonTypes.gameButton);
+	button.classList.add(colors.default);
+	button.id = i;
+	document.getElementById("game-field").appendChild(button);
+}
+let gameButtons = document.getElementsByClassName(buttonTypes.gameButton);
 
 
 // ==================
@@ -33,6 +44,10 @@ const gameButtonsNumber = 5;
 
 function removeArrayElementByValue(array, value) {
 	let index = array.indexOf(value);
+	if (index < 0) {
+		return -1
+	}
+
 	array.splice(index, 1);
 }
 
