@@ -5,12 +5,13 @@
 // ==================
 
 const colors = {
-	red: "button- color - red",
+	red: "button-color-red",
 	green: "button-color-green",
 	blue: "button-color-blue",
 	default: "button-color-default"
 };
 let currentColor = "";
+let roundColors = [];
 
 const gameStates = {
 	gameRuns: "gameRuns",
@@ -77,5 +78,34 @@ function countdownTimer(seconds, endFunction) {
 			timer.innerText = Math.floor(remainingTime / 1000);
 		}
 	},500);
+}
+
+function setRandomRoundColors() {
+	for (let i = 0; i < gameButtonsNumber; i++) {
+		let keys = Object.keys(colors);
+		let randomKey = keys[Math.floor(Math.random()) * (keys.length - 1)];
+		roundColors.push(colors[randomKey]);
+	}
+}
+
+function removeAllColorsFromGameButtons() {
+	for (let button of gameButtons) {
+		for (let color of colors) {
+			button.classList.remove(color);
+		}
+	}
+}
+
+function setRoundColorsToGameButtons() {
+	for (let button of gameButtons) {
+		button.classList.remove(colors.default);
+		button.classList.add(roundColors[button.id]);
+	}
+}
+
+function setDefaultColorToGameButtons() {
+	for (let button of gameButtons) {
+		button.classList.add(colors.default);
+	}
 }
 
