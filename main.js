@@ -147,24 +147,38 @@ function showGameResults() {
 	}
 }
 
-function paletteButtonOnClick(event) {
-	let button = event.srcElement;
-	currentColor = button.classList[1];
+function gameButtonOnClick(event) {
+	
 }
 
-function addAllPaletteButtonsListeners() {
-	
+function addAllGameButtonsEventListeners() {
+	for (let button of gameButtons) {
+		button.addEventListener("click", gameButtonOnClick);
+	}
 }
 
 function removeGameButtonsEventListeners() {
 	for (let button of gameButtons) {
-		// remove game buttons listeners
+		button.removeEventListener("click", gameButtonOnClick);
+	}
+}
+
+function paletteButtonOnClick(event) {
+	let button = event.srcElement;
+	currentColor = button.classList[1];
+	addAllGameButtonsEventListeners();
+	removePaletteButtonsEventListeners();
+}
+
+function addAllPaletteButtonsEventListeners() {
+	for (let button of paletteButtons) {
+		button.addEventListener("click", paletteButtonOnClick);
 	}
 }
 
 function removePaletteButtonsEventListeners() {
 	for (let button of paletteButtons) {
-		// remove palette buttons listeners
+		button.removeEventListener("click", paletteButtonOnClick);
 	}
 }
 
