@@ -1,8 +1,8 @@
 "use strict";
 
-// ==================
+// ====================================
 // variables
-// ==================
+// ====================================
 
 const colors = {
 	red: "button-color-red",
@@ -37,11 +37,13 @@ for (let i = 0; i < gameButtonsNumber; i++) {
 	document.getElementById("game-field").appendChild(button);
 }
 let gameButtons = document.getElementsByClassName(buttonTypes.gameButton);
+let paletteButtons = document.getElementsByClassName(buttonTypes.paletteButton);
 
+let correctAnswersCountPerRounds = [];
 
-// ==================
+// ====================================
 // functions
-// ==================
+// ====================================
 
 function removeArrayElementByValue(array, value) {
 	let index = array.indexOf(value);
@@ -131,4 +133,49 @@ function getCorrectRoundAnswersCount() {
 
 	return correctAnswersCount;
 }
+
+function showGameResults() {
+	let resultsBox = document.getElementById("results-box");
+	resultsBox.style.visibility = "visible";
+
+	let absoluteResults = document.getElementById("results-absolute");
+	let relativeResults = document.getElementById("results-relative");
+
+	for (let i = 0; i < correctAnswersForAllRounds.length; i++) {
+		absoluteResults.innerText += (String(correctAnswersCountPerRounds[i]) + ", ");
+		relativeResults.innerText += (String(correctAnswersCountPerRounds[i] / gameButtonsNumber * 100) + "%, ");
+	}
+}
+
+function paletteButtonOnClick(event) {
+	let button = event.srcElement;
+	currentColor = button.classList[1];
+}
+
+function addAllPaletteButtonsListeners() {
+	
+}
+
+function removeGameButtonsEventListeners() {
+	for (let button of gameButtons) {
+		// remove game buttons listeners
+	}
+}
+
+function removePaletteButtonsEventListeners() {
+	for (let button of paletteButtons) {
+		// remove palette buttons listeners
+	}
+}
+
+function timerIsUp() {
+	removeGameButtonsEventListeners();
+	removePaletteButtonsEventListeners();
+	showGameResults();
+}
+
+
+// ====================================
+// globally executed code
+// ====================================
 
