@@ -23,6 +23,7 @@ const gameStates = {
 	checkingResults: "checkingResults"
 };
 let currentGameStates = [];
+let gameOn = false;
 
 const buttonTypes = {
 	paletteButton: "palette-button",
@@ -148,7 +149,9 @@ function showGameResults() {
 }
 
 function gameButtonOnClick(event) {
-	
+	// change cicked button color
+	// check end of the round
+	// 	- get correct answers count for round
 }
 
 function addAllGameButtonsEventListeners() {
@@ -188,8 +191,21 @@ function timerIsUp() {
 	showGameResults();
 }
 
+function newRound() {
+	if (!gameOn) {
+		countdownTimer(60, timerIsUp);
+		gameOn = true;
+	}
+
+	setRandomRoundColors();
+	setRoundColorsToGameButtons();
+	executeFunctionWithSleep(setDefaultColorToGameButtons, 2000);
+	addAllPaletteButtonsEventListeners();
+}
 
 // ====================================
 // globally executed code
 // ====================================
 
+let startButton = document.getElementById("start-button");
+startButton.addEventListener("click", newRound);
