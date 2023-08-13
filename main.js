@@ -52,6 +52,16 @@ function removeArrayElementByValue(array, value) {
 	array.splice(index, 1);
 }
 
+function getGameButtonsCurrentColors() {
+	let buttonColors = [];
+
+	for (let i = 0; i < gameButtonsNumber; i++) {
+		buttonColors.push(gameButtons[String(i)].classList[1]);
+	}
+
+	return buttonColors;
+}
+
 function sleep(func,ms) {
 	return new Promise(resolve => setTimeout(func,ms));
 }
@@ -97,9 +107,9 @@ function removeAllColorsFromGameButtons() {
 }
 
 function setRoundColorsToGameButtons() {
-	for (let button of gameButtons) {
-		button.classList.remove(colors.default);
-		button.classList.add(roundColors[button.id]);
+	for (let i = 0; i < gameButtonsNumber; i++) {
+		gameButtons[String(i)].classList.remove(colors.default);
+		gameButtons[String(i)].classList.add(roundColors[i]);
 	}
 }
 
@@ -107,5 +117,18 @@ function setDefaultColorToGameButtons() {
 	for (let button of gameButtons) {
 		button.classList.add(colors.default);
 	}
+}
+
+function getCorrectRoundAnswersCount() {
+	let correctAnswersCount = 0;
+	let buttonColors = getGameButtonsColors();
+
+	for (let i = 0; i < gameButtonsNumber; i++) {
+		if (buttonColors[i] == roundColors[i]) {
+			correctAnswersCount++;
+		}
+	}
+
+	return correctAnswersCount;
 }
 
