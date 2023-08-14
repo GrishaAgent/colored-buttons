@@ -1,3 +1,12 @@
+// Current errors (from console):
+// Uncaught TypeError: button.classList[1].remove is not a function
+    // at setCurrentColorToButton(main.js: 126: 22)
+    // at HTMLButtonElement.gameButtonOnClick(main.js: 167: 2)
+// Uncaught ReferenceError: correctAnswersForAllRounds is not defined
+    // at showGameResults(main.js: 150: 22)
+    // at timerIsUp(main.js: 207: 2)
+    // at main.js: 89: 4
+
 "use strict";
 
 // ====================================
@@ -13,16 +22,16 @@ const colors = {
 let currentColor = "";
 let roundColors = [];
 
-const gameStates = {
-	gameRuns: "gameRuns",
-	gameOver: "gameOver",
-	roundRuns: "roundRuns",
-	roundOver: "roundOver",
-	listenningPaletteButtons: "listenningPaletteButtons",
-	listenningGameButtons: "listenningGameButtons",
-	checkingResults: "checkingResults"
-};
-let currentGameStates = [];
+// const gameStates = {
+// 	gameRuns: "gameRuns",
+// 	gameOver: "gameOver",
+// 	roundRuns: "roundRuns",
+// 	roundOver: "roundOver",
+// 	listenningPaletteButtons: "listenningPaletteButtons",
+// 	listenningGameButtons: "listenningGameButtons",
+// 	checkingResults: "checkingResults"
+// };
+// let currentGameStates = [];
 let gameOn = false;
 
 const buttonTypes = {
@@ -170,15 +179,15 @@ function gameButtonOnClick(event) {
 	checkEndOfRound();
 }
 
-function addAllGameButtonsEventListeners() {
-	for (let button of gameButtons) {
-		button.addEventListener("click", gameButtonOnClick);
-	}
-}
-
 function removeGameButtonsEventListeners() {
 	for (let button of gameButtons) {
 		button.removeEventListener("click", gameButtonOnClick);
+	}
+}
+
+function addAllGameButtonsEventListeners() {
+	for (let button of gameButtons) {
+		button.addEventListener("click",gameButtonOnClick);
 	}
 }
 
@@ -189,15 +198,15 @@ function paletteButtonOnClick(event) {
 	removePaletteButtonsEventListeners();
 }
 
-function addAllPaletteButtonsEventListeners() {
-	for (let button of paletteButtons) {
-		button.addEventListener("click", paletteButtonOnClick);
-	}
-}
-
 function removePaletteButtonsEventListeners() {
 	for (let button of paletteButtons) {
 		button.removeEventListener("click", paletteButtonOnClick);
+	}
+}
+
+function addAllPaletteButtonsEventListeners() {
+	for (let button of paletteButtons) {
+		button.addEventListener("click",paletteButtonOnClick);
 	}
 }
 
