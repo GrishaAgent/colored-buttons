@@ -1,4 +1,4 @@
- # Game Cycle
+ <!-- # Game Cycle
 	1. start of the game	
 	2. start countdown timer
 	3. choose colors for each button
@@ -18,4 +18,20 @@
 	
 * button colors checking = compare RGB or HEX values of button colors
 * have variable for chosen color
-* have eventListeners for palette buttons and for game buttons
+* have eventListeners for palette buttons and for game buttons -->
+
+# Color Functions:
+- `getGameButtonsCurrentColors()`
+  - get list of current game buttons colors
+- `setRandomRoundColors()`
+  - set round colors list random colors
+- `removeAllColorsFromGameButtons()`
+  - removes all colors (from `colors`) from game buttons
+- `setRoundColorsToGameButtons()`
+  - deletes `color.default` from game buttons and sets round colors to game buttons
+- `setDefaultColorToGameButtons()`
+  - sets default color to game buttons
+- `setCurrentColorToButton(button)`
+  - `button` - any element of `HTMLCollection` containing buttons
+  - removes color of index 1
+  - sets `currentColor` to `button`

@@ -122,7 +122,12 @@ function setDefaultColorToGameButtons() {
 	}
 }
 
-function getCorrectRoundAnswersCount() {
+function setCurrentColorToButton(button) {
+	button.classList[1].remove();
+	button.classList.add(currentColor);
+}
+
+function saveCorrectAnswersCountPerRound() {
 	let correctAnswersCount = 0;
 	let buttonColors = getGameButtonsColors();
 
@@ -132,7 +137,7 @@ function getCorrectRoundAnswersCount() {
 		}
 	}
 
-	return correctAnswersCount;
+	correctAnswersCountPerRounds.push(correctAnswersCount);
 }
 
 function showGameResults() {
@@ -148,10 +153,21 @@ function showGameResults() {
 	}
 }
 
+function checkEndOfRound() {
+	let gameButtonsColors = getGameButtonsCurrentColors();
+	if (!gameButtonsColors.includes(colors.default)) {
+		saveCorrectAnswersCountPerRound();
+		roundColors = [];
+		currentColor = "";
+	}
+}
+
 function gameButtonOnClick(event) {
-	// change cicked button color
-	// check end of the round
-	// 	- get correct answers count for round
+	let button = event.srcElement;
+	setCurrentColorToButton(button);
+	removeGameButtonsEventListeners();
+
+	checkEndOfRound();
 }
 
 function addAllGameButtonsEventListeners() {
