@@ -1,25 +1,3 @@
- <!-- # Game Cycle
-	1. start of the game	
-	2. start countdown timer
-	3. choose colors for each button
-	4. start 2s timer
-		* show button colors
-		* finish 2s timer  
-		* hide button colors
-	5. coloring of the buttons:
-		* click on the button - button with "chosen" effect
-		* choose color from color palette
-	6. all buttons colored before finishing countdown timer:
-		* finish countdown timer
-		* check button colors
-		* if some buttons not colored:
-			* finish countdown timer
-			* check button colors
-	
-* button colors checking = compare RGB or HEX values of button colors
-* have variable for chosen color
-* have eventListeners for palette buttons and for game buttons -->
-
 # Color Functions:
 - `getGameButtonsCurrentColors()`
   - get list of current game buttons colors
@@ -30,8 +8,8 @@
 - `setRoundColorsToGameButtons()`
   - deletes `color.default` from game buttons and sets round colors to game buttons
 - `setDefaultColorToGameButtons()`
-  - sets default color to game buttons
+  - removes all game buttons colors and then sets default color to game buttons
 - `setCurrentColorToButton(button)`
   - `button` - any element of `HTMLCollection` containing buttons
-  - removes color of index 1
+  - removes all colors of this button
   - sets `currentColor` to `button`

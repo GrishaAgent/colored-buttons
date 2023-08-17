@@ -22,16 +22,6 @@ const colors = {
 let currentColor = "";
 let roundColors = [];
 
-// const gameStates = {
-// 	gameRuns: "gameRuns",
-// 	gameOver: "gameOver",
-// 	roundRuns: "roundRuns",
-// 	roundOver: "roundOver",
-// 	listenningPaletteButtons: "listenningPaletteButtons",
-// 	listenningGameButtons: "listenningGameButtons",
-// 	checkingResults: "checkingResults"
-// };
-// let currentGameStates = [];
 let gameOn = false;
 
 const buttonTypes = {
@@ -54,25 +44,6 @@ let correctAnswersCountPerRounds = [];
 // ====================================
 // functions
 // ====================================
-
-function removeArrayElementByValue(array, value) {
-	let index = array.indexOf(value);
-	if (index < 0) {
-		return -1
-	}
-
-	array.splice(index, 1);
-}
-
-function getGameButtonsCurrentColors() {
-	let buttonColors = [];
-
-	for (let i = 0; i < gameButtonsNumber; i++) {
-		buttonColors.push(gameButtons[String(i)].classList[1]);
-	}
-
-	return buttonColors;
-}
 
 function sleep(func,ms) {
 	return new Promise(resolve => setTimeout(func,ms));
@@ -102,18 +73,28 @@ function countdownTimer(seconds, endFunction) {
 	},500);
 }
 
+function getGameButtonsCurrentColors() {
+	let buttonColors = [];
+
+	for (let i = 0; i < gameButtonsNumber; i++) {
+		buttonColors.push(gameButtons[String(i)].classList[1]);
+	}
+
+	return buttonColors;
+}
+
 function setRandomRoundColors() {
 	for (let i = 0; i < gameButtonsNumber; i++) {
 		let keys = Object.keys(colors);
-		let randomKey = keys[Math.floor(Math.random()) * (keys.length - 1)];
+		let randomKey = keys[Math.floor(Math.random() * (keys.length - 1))];
 		roundColors.push(colors[randomKey]);
 	}
 }
 
 function removeAllColorsFromGameButtons() {
 	for (let button of gameButtons) {
-		for (let color of colors) {
-			button.classList.remove(color);
+		for (let color of Object.keys(colors)) {
+			button.classList.remove(colors[color]);
 		}
 	}
 }
@@ -126,19 +107,22 @@ function setRoundColorsToGameButtons() {
 }
 
 function setDefaultColorToGameButtons() {
+	removeAllColorsFromGameButtons();
 	for (let button of gameButtons) {
 		button.classList.add(colors.default);
 	}
 }
 
 function setCurrentColorToButton(button) {
-	button.classList[1].remove();
+	for (let color of Object.keys(colors)) {
+		button.classList.remove(colors[color]);
+	}
 	button.classList.add(currentColor);
 }
 
 function saveCorrectAnswersCountPerRound() {
 	let correctAnswersCount = 0;
-	let buttonColors = getGameButtonsColors();
+	let buttonColors = getGameButtonsCurrentColors();
 
 	for (let i = 0; i < gameButtonsNumber; i++) {
 		if (buttonColors[i] == roundColors[i]) {
@@ -156,7 +140,7 @@ function showGameResults() {
 	let absoluteResults = document.getElementById("results-absolute");
 	let relativeResults = document.getElementById("results-relative");
 
-	for (let i = 0; i < correctAnswersForAllRounds.length; i++) {
+	for (let i = 0; i < correctAnswersCountPerRounds.length; i++) {
 		absoluteResults.innerText += (String(correctAnswersCountPerRounds[i]) + ", ");
 		relativeResults.innerText += (String(correctAnswersCountPerRounds[i] / gameButtonsNumber * 100) + "%, ");
 	}
@@ -168,6 +152,10 @@ function checkEndOfRound() {
 		saveCorrectAnswersCountPerRound();
 		roundColors = [];
 		currentColor = "";
+		setDefaultColorToGameButtons();
+		newRound();
+	} else {
+		addAllPaletteButtonsEventListeners();
 	}
 }
 
@@ -217,13 +205,16 @@ function timerIsUp() {
 }
 
 function newRound() {
+	setRandomRoundColors();
+
 	if (!gameOn) {
 		countdownTimer(60, timerIsUp);
 		gameOn = true;
+		setRoundColorsToGameButtons();
+	} else {
+		executeFunctionWithSleep(setRoundColorsToGameButtons, 150);
 	}
 
-	setRandomRoundColors();
-	setRoundColorsToGameButtons();
 	executeFunctionWithSleep(setDefaultColorToGameButtons, 2000);
 	addAllPaletteButtonsEventListeners();
 }
